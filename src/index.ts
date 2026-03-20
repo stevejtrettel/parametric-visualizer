@@ -10,8 +10,6 @@ export { buildGeometry } from './surfaces/buildGeometry';
 export type { BuildGeometryOptions } from './surfaces/buildGeometry';
 export type { Surface, DifferentialSurface, SurfaceDomain, SurfacePartials, FirstFundamentalForm } from './surfaces/types';
 export { Torus } from './surfaces/Torus';
-export { BoysSurface } from './surfaces/BoysSurface';
-export { KleinBottle } from './surfaces/KleinBottle';
 
 // Shaders
 export { createSurfaceShader } from './shaders/SurfaceShader';

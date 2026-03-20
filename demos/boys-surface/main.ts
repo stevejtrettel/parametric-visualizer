@@ -7,16 +7,21 @@
 
 import * as THREE from 'three';
 import { App } from '@/core/App';
-import { BoysSurface } from '@/surfaces/BoysSurface';
+import { BoysSurface } from './BoysSurface';
 import { createSurfaceShader, type SurfaceShaderResult } from '@/shaders/SurfaceShader';
 import { createSlicedSurface } from '@/shaders/SlicedSurface';
+
+// --- Config ---
+
+/** Set to false to start with slice animation paused (press Space to toggle at runtime). */
+let autoAnimate = true;
 
 // --- Scene ---
 
 const app = new App({ antialias: true, debug: true });
 app.camera.fov = 30;
 app.camera.updateProjectionMatrix();
-app.camera.position.set(0, 2, 6);
+app.camera.position.set(0, 2, 12);
 app.controls.target.set(0, -0.3, 0);
 app.controls.update();
 
@@ -112,21 +117,14 @@ function setMode(index: number) {
   mesh.setShader(shader);
 }
 
-window.addEventListener('keydown', (e) => {
-  const n = parseInt(e.key);
-  if (n >= 1 && n <= modes.length) setMode(n - 1);
-});
-
 // --- UI ---
-
-let animate = true;
 
 app.overlay.addSlider({
   label: 'Slice',
   min: 0, max: 1, step: 0.01, value: 1,
   format: (v) => `Slice = ${v.toFixed(2)}`,
   onChange: (v) => {
-    animate = false;
+    autoAnimate = false;
     shader.uniforms.uSlice.value = v;
   },
 });
@@ -139,13 +137,15 @@ app.overlay.addSlider({
 });
 
 window.addEventListener('keydown', (e) => {
-  if (e.key === ' ') animate = !animate;
+  if (e.key === ' ') autoAnimate = !autoAnimate;
+  const n = parseInt(e.key);
+  if (n >= 1 && n <= modes.length) setMode(n - 1);
 });
 
 // --- Animation ---
 
 app.addAnimateCallback((elapsed) => {
-  if (animate) {
+  if (autoAnimate) {
     const s = (1 - Math.cos(elapsed / 3)) / 2;
     shader.uniforms.uSlice.value = s;
   }

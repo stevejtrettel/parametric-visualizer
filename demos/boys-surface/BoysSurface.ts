@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import type { Surface, SurfaceDomain } from './types';
-import { cmul, cdiv, cadd, csub, cscale, type Complex } from '../math/complex';
+import type { Surface, SurfaceDomain } from '@/surfaces/types';
+import { cmul, cdiv, cadd, csub, cscale, type Complex } from '@/math/complex';
 
 const SQRT5 = Math.sqrt(5);
 const ONE: Complex = [1, 0];

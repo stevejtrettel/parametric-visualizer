@@ -36,12 +36,15 @@ export class OverlaySlider extends Input<number> {
     this.input.className = 'cr-overlay-slider-input';
     this.domElement.appendChild(this.input);
 
-    this.input.addEventListener('input', () => {
+    this.handleInput = () => {
       const value = parseFloat(this.input.value);
       this.labelEl.textContent = this.format(value);
       if (this.onChange) this.onChange(value);
-    });
+    };
+    this.input.addEventListener('input', this.handleInput);
   }
+
+  private handleInput: () => void;
 
   setValue(value: number): void {
     this.input.value = value.toString();
@@ -50,5 +53,10 @@ export class OverlaySlider extends Input<number> {
 
   getValue(): number {
     return parseFloat(this.input.value);
+  }
+
+  dispose(): void {
+    this.input.removeEventListener('input', this.handleInput);
+    super.dispose();
   }
 }

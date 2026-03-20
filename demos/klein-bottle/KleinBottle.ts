@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import type { Surface, SurfaceDomain } from './types';
+import type { Surface, SurfaceDomain } from '@/surfaces/types';
 
 const PI = Math.PI;
 

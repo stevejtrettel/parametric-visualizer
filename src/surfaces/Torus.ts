@@ -5,6 +5,7 @@ import type { DifferentialSurface, SurfaceDomain, SurfacePartials, FirstFundamen
 export class Torus implements DifferentialSurface {
   readonly params = new Params(this);
 
+  // Reactive properties — created at runtime by Params.define() via Object.defineProperty.
   declare R: number;
   declare r: number;
 

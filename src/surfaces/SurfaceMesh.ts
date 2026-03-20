@@ -23,6 +23,8 @@ export class SurfaceMesh extends THREE.Mesh {
   private surface: Surface;
   uniforms: Record<string, { value: any }>;
 
+  // Reactive properties — created at runtime by Params.define() via Object.defineProperty.
+  // `declare` provides type info without emitting initializers that would shadow them.
   declare uSegments: number;
   declare vSegments: number;
   declare color: number;

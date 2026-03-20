@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import type { Surface } from './types';
+import type { DifferentialSurface, Surface } from './types';
 
 export interface BuildGeometryOptions {
   uMin?: number;
@@ -37,7 +37,7 @@ export function buildGeometry(
       positions.push(point.x, point.y, point.z);
 
       if (hasNormals) {
-        const normal = (surface as any).computeNormal(u, v);
+        const normal = (surface as DifferentialSurface).computeNormal(u, v);
         normals.push(normal.x, normal.y, normal.z);
       }
 
