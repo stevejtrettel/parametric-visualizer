@@ -1,14 +1,13 @@
 /**
- * Torus — a simple colored torus with no slicing.
+ * Simple — a plain torus with no custom shader.
  *
- * Demonstrates the basics: surface + shader + mesh + rotation.
+ * The simplest possible demo: just a surface, a mesh, and material properties.
  */
 
 import * as THREE from 'three';
 import { App } from '@/core/App';
 import { Torus } from '@/surfaces/Torus';
 import { SurfaceMesh } from '@/surfaces/SurfaceMesh';
-import { createSurfaceShader } from '@/shaders/SurfaceShader';
 
 // --- Config ---
 
@@ -38,19 +37,10 @@ app.scene.add(new THREE.AmbientLight(0xffffff, 0.5));
 
 const torus = new Torus({ R: 1.5, r: 0.6 });
 
-const shader = createSurfaceShader({
-  color: `
-    float hue = fract(uv.x + 2.0 * uv.y);
-    vec3 base = hsb2rgb(vec3(hue, 0.7, 0.6));
-    float grid = coordGrid(uv, 8.0);
-    return base + 1.5 * vec3(grid);
-  `,
-});
-
 const mesh = new SurfaceMesh(torus, {
-  ...shader,
   uSegments: 64,
   vSegments: 64,
+  color: 0x4488ff,
   roughness: 0.3,
   metalness: 0.1,
 });

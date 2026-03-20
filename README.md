@@ -26,7 +26,8 @@ Open `http://localhost:5173`. The default demo is set in [index.html](index.html
 
 | Demo | Description |
 |------|-------------|
-| `demos/torus/` | Colored torus with adjustable radii — uses a reusable `Torus` surface class from the library |
+| `demos/simple/` | Plain torus with no custom shader — the simplest possible demo |
+| `demos/torus/` | Colored torus with a custom shader and adjustable radii |
 | `demos/wave/` | Animated height field — uses `SurfaceMesh.fromFunction()`, no surface class needed |
 | `demos/boys-surface/` | Boy's surface with sliced rendering — defines its own `BoysSurface` class alongside the demo |
 | `demos/klein-bottle/` | Klein bottle with glass overlay — defines its own `KleinBottle` class alongside the demo |
